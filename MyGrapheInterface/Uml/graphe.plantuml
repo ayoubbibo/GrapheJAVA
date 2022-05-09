@@ -1,0 +1,63 @@
+@startuml graphe
+skinparam actorStyle awesome
+class Vertex {
+    -int idVertex
+    -String info
+    -Color colorVertex
+}
+note left of Vertex::idVertex
+  This Vetex id is unique
+end note
+
+abstract class Edge {
+    -int idEdge
+    -Color colorEdge
+    -Vertex[] ends
+    -double value
+    -{static} nb_edges
+}
+note left of Edge::idEdge
+  This Edge id is unique
+end note
+
+
+note left of Edge::nb_edges
+  To give to each edge a unique identifier
+end note
+
+Edge "many" -- "2" Vertex
+
+class UndirectedEdge extends Edge {
+    +Vertex[] getEnds() 
+}
+
+class DirectEdge extends Edge {
+    -int source
+    +Vertex getSource()
+    +Vertex getSink()
+}
+
+note left of DirectEdge::source
+  0 or 1
+end note
+
+abstract class Graph {
+    +int nbOfVertices()
+    +int nbOfEdges()
+    +void addVertex(in Vertex vertex)
+    +void addEdge(in Vertex ver1, Vertex ver2, EdgeKind)
+    +boolean isConnected(in Vertex, in Vertex)
+    +boolean isConnected()
+    +Edge[] getEdges(in Vertex, in Vertex)
+    +Edge[] getEdges()
+    +Vertex[] getVertices()
+    +Edge[] getNeighbourEdges(in Vertex) 
+}
+
+Graph "many"--"1" Edge : contains 
+Graph "many"--"1" Vertex : contains
+note left of Graph::addEdge
+   EdgeKind: ‘directed’ or ‘undirected’
+end note
+
+@enduml
