@@ -1,7 +1,7 @@
-package edge;
+package app.edge;
 import java.awt.*;
 
-import vertex.Vertex;
+import app.vertex.Vertex;
 
 public class UndirectedEdge extends Edge{
 

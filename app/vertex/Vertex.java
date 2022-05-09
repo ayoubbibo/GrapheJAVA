@@ -1,4 +1,4 @@
-package vertex;
+package app.vertex;
 import java.awt.*;
 
 public class Vertex{
