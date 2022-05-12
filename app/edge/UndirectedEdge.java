@@ -19,7 +19,7 @@ public class UndirectedEdge extends Edge{
     }
 
     /**
-     * Get les deux sommets reliés par cette arête
+     * Retourne les deux sommets reliés par cette arête
      * @return Un tableau de dimension 2 contenant les deux objets Vertex
      */
     public Vertex[] getEnds(){

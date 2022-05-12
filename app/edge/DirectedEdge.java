@@ -8,10 +8,10 @@ public class DirectedEdge extends Edge {
     /**
      * Constructeur 
      * @param couleur Objet Color qui définit la couleur utilisée
-     * @param value La valeur contenue par 
-     * @param sommet1
-     * @param sommet2
-     * @param source
+     * @param value La valeur qui sera contenue par l'arête
+     * @param sommet1 Le sommet relié par cette arête
+     * @param sommet2 Le deuxième sommet
+     * @param source Regle : source vaut 1 ou 0, il donne la position du sommet qui est la source de cette arête
      */
     public DirectedEdge(Color couleur, double value, Vertex sommet1, Vertex sommet2, int source){
         super(couleur, value, sommet1, sommet2);
