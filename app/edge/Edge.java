@@ -3,7 +3,7 @@ import java.awt.*;
 
 import app.vertex.Vertex;
 
-abstract class Edge {
+public abstract class Edge {
     private int id;
     private Color couleur;
     protected Vertex[] ends;

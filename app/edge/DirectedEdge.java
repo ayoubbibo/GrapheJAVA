@@ -6,9 +6,9 @@ public class DirectedEdge extends Edge {
     private int source;
 
     /**
-     * 
-     * @param couleur
-     * @param value
+     * Constructeur 
+     * @param couleur Objet Color qui définit la couleur utilisée
+     * @param value La valeur contenue par 
      * @param sommet1
      * @param sommet2
      * @param source
