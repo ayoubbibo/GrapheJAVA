@@ -25,6 +25,6 @@ public class Vertex{
      * Methode toString pour la classe Vertex
      */
     public String toString(){
-        return "Sommet d'identifiant : "+this.id+ " contenant l'information : "+this.info;
+        return "sommet d'identifiant : "+this.id+ " contenant l'information : "+this.info;
     }
 }

@@ -41,9 +41,9 @@ public class DirectedEdge extends Edge {
     public String toString(){
         if(this.source <1)
         {
-            return super.toString() + " source " + this.ends[0] + " but " + this.ends[1] + ".";
+            return super.toString() + " avec comme source le " + this.ends[0] + " et pour but le " + this.ends[1] + ".";
         } 
-        return super.toString() + " source " + this.ends[1] + " but " + this.ends[0] + ".";
+        return super.toString() + " avec comme source le " + this.ends[1] + " et pour but le " + this.ends[0] + ".";
     }
 
 }
