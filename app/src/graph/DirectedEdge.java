@@ -1,10 +1,8 @@
-package app.edge;
+package graph;
 import java.awt.*;
-import app.vertex.Vertex;
 
 public class DirectedEdge extends Edge {
     private int source;
-
     /**
      * Constructeur 
      * @param couleur Objet Color qui définit la couleur utilisée
@@ -36,4 +34,16 @@ public class DirectedEdge extends Edge {
         }
         return this.ends[1];
     }
+    
+    /**
+     * Méthode toString
+     */
+    public String toString(){
+        if(this.source <1)
+        {
+            return super.toString() + " source " + this.ends[0] + " but " + this.ends[1] + ".";
+        } 
+        return super.toString() + " source " + this.ends[1] + " but " + this.ends[0] + ".";
+    }
+
 }

@@ -1,4 +1,4 @@
-package app.vertex;
+package graph;
 import java.awt.*;
 
 public class Vertex{

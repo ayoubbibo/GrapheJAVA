@@ -1,7 +1,4 @@
-package app.graph;
-
-import app.vertex.*;
-import app.edge.*;
+package graph;
 
 public interface Graph{
 

@@ -1,7 +1,5 @@
-package app.edge;
+package graph;
 import java.awt.*;
-
-import app.vertex.Vertex;
 
 public abstract class Edge {
     private int id;

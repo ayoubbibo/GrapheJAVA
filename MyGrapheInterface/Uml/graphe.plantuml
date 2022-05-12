@@ -29,7 +29,6 @@ note left of Edge::nb_edges
 end note
 
 Edge "*" o-- "2 ends" Vertex 
-
 class UndirectedEdge extends Edge {
     +Vertex[] getEnds() 
 }

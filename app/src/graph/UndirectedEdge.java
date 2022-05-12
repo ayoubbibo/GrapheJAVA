@@ -1,7 +1,5 @@
-package app.edge;
+package graph;
 import java.awt.*;
-
-import app.vertex.Vertex;
 
 public class UndirectedEdge extends Edge{
 
