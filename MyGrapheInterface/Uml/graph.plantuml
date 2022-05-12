@@ -1,8 +1,8 @@
-@startuml graphe
+@startuml graph
 skinparam actorStyle awesome
 
-package "Graphe" #DDDDDD {
- 
+package "Graph" #DDDDDD 
+{
 class Vertex {
     -int idVertex
     -String info

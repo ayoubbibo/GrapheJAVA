@@ -1,4 +1,4 @@
-package test;
+package graph;
 import graph.*;
 import java.awt.*;
 public class MyTest {
