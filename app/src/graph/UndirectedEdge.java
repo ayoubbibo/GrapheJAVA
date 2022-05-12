@@ -28,6 +28,6 @@ public class UndirectedEdge extends Edge{
      * Methode toString qui réutilise celui du duperConstructeur
      */
     public String toString(){
-        return super.toString()+" C'est une arête non dirigé.";
+        return super.toString()+" C\'est une arête non dirigé. Les sommets sont "+this.ends[0]+" et "+this.ends[1];
     }
 }
