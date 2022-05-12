@@ -25,4 +25,11 @@ public class UndirectedEdge extends Edge{
     public Vertex[] getEnds(){
         return this.ends;
     }
+
+    /**
+     * Methode toString qui réutilise celui du duperConstructeur
+     */
+    public String toString(){
+        return super.toString()+" C'est une arête non dirigé.";
+    }
 }

@@ -30,4 +30,11 @@ public abstract class Edge {
         this.ends[1] = sommet2;
     }
 
+    /**
+     * Méthode toString
+     */
+    public String toString(){
+        return "L'arête d'identifiant : "+this.id+" et la couleur est "+this.couleur+"et contenant la valeur : "+this.value+".";
+    }
+
 }
