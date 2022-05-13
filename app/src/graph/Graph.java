@@ -1,5 +1,7 @@
 package graph;
 
+import graph.impl.*;
+
 public interface Graph{
 
     /**
@@ -18,14 +20,14 @@ public interface Graph{
      * Ajoute un sommet à un graphe
      * @param sommet Un sommet Vertex
      */
-    void addVertex(Vertex sommet);
+    void addVertex(Vertex sommet) throws java.io.IOException;
     
     /**
      * Ajoute une arête à un graphe
      * @param sommet1 Le premier sommet qui va être relié par le sommet
      * @param sommet2 Le deuxième sommet
      */
-    void addEdge(Vertex sommet1, Vertex sommet2);
+    void addEdge(Vertex sommet1, Vertex sommet2) throws IllegalArgumentException;
     
     /**
      * Permet de savoir si tous les sommets sont interconnectés, pas forcément d'arête entre tous 
