@@ -13,4 +13,4 @@ compile: compile1 jar compile2
 	echo Compiled
 
 execute:
-	java -cp implementation/Graph.jar graph/impl/IncidenceArrayGraph
+	java -cp implementation/Graph.jar:implementation/bin graph/impl/IncidenceArrayGraph
