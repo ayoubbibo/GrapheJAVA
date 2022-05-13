@@ -1,5 +1,4 @@
 package graph;
-import graph.*;
 import java.awt.*;
 public class MyTest {
     public static void main(String[] args) {

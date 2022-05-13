@@ -1,5 +1,4 @@
 import app.src.graph.*;
-
 import java.awt.Color;
 import java.util.Scanner;
 
@@ -58,7 +57,6 @@ public class IncidenceArrayGraph implements Graph{
         this.vertices = tab;
 
         //Mettre à jour le tableau des incidences
-
         Edge[][] t = new Edge[this.incidence.length+1][this.incidence[0].length];
         int i, j;
         for(i = 0; i < this.incidence.length; i++){

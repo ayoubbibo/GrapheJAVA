@@ -17,14 +17,6 @@ public class UndirectedEdge extends Edge{
     }
 
     /**
-     * Retourne les deux sommets reliés par cette arête
-     * @return Un tableau de dimension 2 contenant les deux objets Vertex
-     */
-    public Vertex[] getEnds(){
-        return this.ends;
-    }
-
-    /**
      * Methode toString qui réutilise celui du duperConstructeur
      */
     public String toString(){

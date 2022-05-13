@@ -21,14 +21,30 @@ public class Vertex{
         this.info = info;
     }
 
+    /**
+     * Retourne la couleur du vertex
+     * @return Une couleur du vertex
+     */
+    public Color getColor(){
+        return this.couleur;
+    }
+    
+    /**
+     * l'Iidentifiant du vertex
+     * @return un entier qui represente l'Iidentifiant du vertex
+     */
     public int getId(){
         return this.id;
     }
 
-    public int getNbVertex(){
-        return nb_Vertex;
+    /**
+     * l'Iinfo enregistrer de le vertex
+     * @return un String qui represente      * l'Iinfo enregistrer de le vertex
+     */
+    public String getInfo(){
+        return this.info;
     }
-
+    
     /**
      * Methode toString pour la classe Vertex
      */
