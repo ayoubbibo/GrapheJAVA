@@ -1,7 +1,5 @@
 package graph;
 
-import graph.impl.*;
-
 public interface Graph{
 
     /**
@@ -20,7 +18,7 @@ public interface Graph{
      * Ajoute un sommet à un graphe
      * @param sommet Un sommet Vertex
      */
-    void addVertex(Vertex sommet) throws java.io.IOException;
+    void addVertex(Vertex sommet) throws GraphOverflowException, IllegalArgumentException;
     
     /**
      * Ajoute une arête à un graphe

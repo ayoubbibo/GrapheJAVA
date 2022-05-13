@@ -5,35 +5,44 @@ import graph.*;
 import java.awt.Color;
 import java.util.Scanner;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.ListIterator;
+
+import java.lang.reflect.Array;
+
 public class IncidenceArrayGraph implements Graph {
 
-    private Edge[][] incidence;
-    private Edge[] edges;
-    private Vertex[] vertices;
-    int maxEdges;
-    int maxVertices;
-    int numberOfEdges;
-    int numberOfVerticies;
-
+    private ArrayList<ArrayList<Edge>> edges;
+    private ArrayList<Vertex> vertices;
+    private int maxVertex;
 
     /**
      * Constructeur qui crée un graphe vide
-     * @param maxEdges number of edges
+     * @param maxVertex number of edges
      */
-    public IncidenceArrayGraph(int maxEdges, int maxVertices) {
-        this.vertices = new Vertex[maxVertices];
-        this.edges = new Edge[maxEdges];
-        this.incidence = new Edge[maxEdges][maxVertices];
-        this.maxEdges = maxEdges;
-    }
+    public IncidenceArrayGraph(int maxVertex) {
+        this.edges = new ArrayList<ArrayList<Edge>>();
+        for(int i = 0 ; i < maxVertex ; i++) {
+            this.edges.add(new ArrayList<Edge>());
+        }
 
+        this.vertices = new ArrayList<Vertex>();
+    }
 
     /**
      * Retourne le nombre de sommets contenus dans un graphe
      * @return Le nombre de sommets
      */
     public int nbOfVertices(){
-        return this.numberOfVerticies;
+        int count = 0;
+        for(Vertex v : this.vertices){
+            if(v != null){
+                count++;
+            }
+        }
+        return count;
     }
 
     /**
@@ -41,26 +50,35 @@ public class IncidenceArrayGraph implements Graph {
      * @return Le nombre d'arêtes
      */
     public int nbOfEdges(){
-        return this.numberOfEdges;
+        int count = 0;
+        for(ArrayList<Edge> edgeList : edges){
+            count += edgeList.size();
+        }
+        return count/2;
     }
     
     /**
      * Ajoute un sommet à un graphe
      * @param vertex Un sommet Vertex
      */
-    public void addVertex(Vertex vertex) throws java.io.IOException {
-        if(this.maxVertices == this.nbrVertices){
+    public void addVertex(Vertex vertex) throws GraphOverflowException, IllegalArgumentException {
+        int id = vertex.getId();
+        if(id>=this.vertices.size()) {
             throw new GraphOverflowException("Too much vertices");
-        }
-        // Vérifier que le sommet n'existe pas déjà
-        int i = 0;
-        for(Vertex vertex : this.vertices){
-            if(vertex.getId() == vertex.getId()){
+        } else {
+            if(this.vertices.get(id) == null) {
                 throw new IllegalArgumentException("Vertex already exists");
+            } else {
+                if(this.vertices.size() == this.maxVertex){
+                    // agrandissement de la liste
+                    for(int i = 0 ; i < maxVertex ; i++) {
+                        this.edges.add(new ArrayList<Edge>());
+                    }
+                    this.maxVertex = this.vertices.size();
+                }
+                Array.set(this.vertices, id, vertex);
             }
         }
-        // Ajouter le sommet
-        this.vertices.add(vertex);
     }
     
     /**
@@ -72,25 +90,20 @@ public class IncidenceArrayGraph implements Graph {
      * @param directed true si l'arête est dirigée
      */
     public void addEdge(Color color, Vertex vertex1, Vertex vertex2, int value, Boolean directed) throws IllegalArgumentException {
-        Vertex firstVertex = null;
-        Vertex secondVertex = null;
-        for(Vertex vertex : this.vertices){
-            if(vertex.getId() == vertex1.getId()){
-                firstVertex = vertex;
-            }
-            if(v.getId() == vertex2.getId()){
-                secondVertex = vertex;
-            }
-        }
+        int id1 = vertex1.getId();
+        int id2 = vertex2.getId();
 
-        if(Object.isNull(firstVertex)  && Object.isNull(secondVertex)){
+        if(this.edges.get(id1)==null && this.edges.get(id2)==null){
             throw new IllegalArgumentException("At least one of the vertices does not exist in graph");
         } else {
+            Edge edge;
             if(directed) {
-                this.edges.add(new DirectedEdge(color, firstVertex, secondVertex, value));
+                edge = new DirectedEdge(color, value, this.vertices.get(id1), this.vertices.get(id2), 0);
             } else {
-                this.edges.add(new UndirectedEdge(color, firstVertex, secondVertex, value));
+                edge = new UndirectedEdge(color, value, this.vertices.get(id1), this.vertices.get(id2));
             }  
+            this.edges.get(id1).add(edge);
+            this.edges.get(id2).add(edge);
         }
     }
     
@@ -101,7 +114,7 @@ public class IncidenceArrayGraph implements Graph {
      * @param vertex2 La deuxième arête
      */
     public void addEdge(Vertex vertex1, Vertex vertex2) throws IllegalArgumentException {
-        addVertex(new Color(255, 255, 255), vertex1, vertex2, 0, false);
+        addEdge(new Color(255, 255, 255), vertex1, vertex2, 0, false);
     }
 
     /**
@@ -110,13 +123,7 @@ public class IncidenceArrayGraph implements Graph {
      * @param vertex2 vertex
      */
     public boolean isConnected(Vertex vertex1, Vertex vertex2) {
-        for(Edge edge : this.edges) {
-            Vertex ends[] = edge.getEnds();
-            if(ends[0] == vertex1 && ends[1] == vertex2) {
-                return true;
-            }
-        }
-        return false;
+        return true; // A faire
     }
     
     /**
@@ -124,23 +131,7 @@ public class IncidenceArrayGraph implements Graph {
      * @return retoune True si ils sont interconnectés
      */
     public boolean isConnected(){
-        for(Vertex vertex1 : this.vertices) {
-            Boolean connected = false;
-            int i = 0;
-            while(!connected && i<this.vertices.length) {
-                Vertex vertex2 = this.vertices.get[i];
-                if(vertex1!=vertex2) {
-                    if(this.isConnected(vertex1, vertex2)){
-                        connected = true;
-                    }
-                }
-                i++;
-            }
-            if(!connected){
-                return false;
-            }
-        }
-        return true;
+        return true; // A faire
     }
     
     /**
@@ -150,22 +141,20 @@ public class IncidenceArrayGraph implements Graph {
      * @return
      */
     public Edge[] getEdges(Vertex vertex1, Vertex vertex2){
-		Edge edges = new Edge[this.edges.length];
-        int count = 0;
-        for(Edge edge : this.edges){
+        ArrayList<Edge> edgeArray = new ArrayList<Edge>();
+        for(Edge edge : this.edges.get(vertex1.getId())){
             Vertex[] vertices = edge.getEnds();
             if((vertices[0]==vertex1 && vertices[1]==vertex2) || (vertices[0]==vertex2 && vertices[1]==vertex1)){
-                edges.add(edge);
-                count++;
+                edgeArray.add(edge);
             }
         }
 
         // Créer un tableau de la bonne taille
 
-        Edge result = new Edge[count];
+        Edge result[] = new Edge[edgeArray.size()];
         int i = 0;
-        while(i<count){
-            result[i] = this.edges[i];
+        while(i<edgeArray.size()){
+            result[i] = edgeArray.get(i);
             i++;
         }
 
@@ -177,7 +166,25 @@ public class IncidenceArrayGraph implements Graph {
      * @return Tableau d'arêtes
      */
     public Edge[] getEdges(){
-        return this.edges;
+        ArrayList<Edge> edgeArray = new ArrayList<Edge>();
+        for(ArrayList<Edge> edgeList : this.edges) {
+            for(Edge edge : edgeList) {
+                if(!edgeArray.contains(edge)){
+                    edgeArray.add(edge);
+                }
+            }
+        }
+
+        // Créer un tableau de la bonne taille
+
+        Edge result[] = new Edge[edgeArray.size()];
+        int i = 0;
+        while(i<edgeArray.size()){
+            result[i] = edgeArray.get(i);
+            i++;
+        }
+
+        return result;
     }
     
     /**
@@ -185,7 +192,13 @@ public class IncidenceArrayGraph implements Graph {
      * @return Tableau de Vertex (sommets)
      */
     public Vertex[] getVertices(){
-        return this.vertices;
+        Vertex result[] = new Vertex[this.vertices.size()];
+        int i = 0;
+        while(i<this.vertices.size()){
+            result[i] = this.vertices.get(i);
+            i++;
+        }
+        return result;
     }
     
     /**
@@ -194,22 +207,20 @@ public class IncidenceArrayGraph implements Graph {
      * @return Tableau des arête dont un des deux sommets est le vertex en entrée
      */
     public Edge[] getNeighborEdges(Vertex vertex){
-		Edge edges = new Edge[this.edges.length];
-        int count = 0;
-		for(Edge edge : this.edges) {
+        ArrayList<Edge> edgeArray = new ArrayList<Edge>();
+		for(Edge edge : this.edges.get(vertex.getId())) {
             Vertex[] vertices = edge.getEnds();
             if(vertices[0]==vertex || vertices[1]==vertex) {
-                edges.add(edge);
-                count++;
+                edgeArray.add(edge);
             }
         }
 
         // Créer un tableau de la bonne taille
 
-        Edge result = new Edge[count];
+        Edge result[] = new Edge[edgeArray.size()];
         int i = 0;
-        while(i<count){
-            result[i] = this.edges[i];
+        while(i<edgeArray.size()){
+            result[i] = edgeArray.get(i);
             i++;
         }
 
