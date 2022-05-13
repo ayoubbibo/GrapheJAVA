@@ -27,7 +27,38 @@ public abstract class Edge {
         this.ends[0] = sommet1;
         this.ends[1] = sommet2;
     }
+    
+    /**
+     * Retourne les deux sommets reliés par cette arête
+     * @return Un tableau de dimension 2 contenant les deux objets Vertex
+     */
+    public Vertex[] getEnds(){
+        return this.ends;
+    }
 
+    /**
+     * l'Iidentifiant de l'edge
+     * @return un entier qui represente l'Iidentifiant de l'edge
+     */
+    public int getId(){
+        return this.id;
+    }
+
+    /**
+     * Retourne la valeur enregistrer dans l'edge
+     * @return Une valeur de type double 2 enregistrer dans l'edge
+     */
+    public double getValue(){
+        return this.value;
+    }
+
+    /**
+     * Retourne la couleur de l'edge
+     * @return Une couleur de l'edge
+     */
+    public Color getColor(){
+        return this.couleur;
+    }
     /**
      * Méthode toString
      */
