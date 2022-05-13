@@ -21,6 +21,14 @@ public class Vertex{
         this.info = info;
     }
 
+    public int getId(){
+        return this.id;
+    }
+
+    public int getNbVertex(){
+        return nb_Vertex;
+    }
+
     /**
      * Methode toString pour la classe Vertex
      */
