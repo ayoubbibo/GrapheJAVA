@@ -123,7 +123,51 @@ public class IncidenceArrayGraph implements Graph {
      * @param vertex2 vertex
      */
     public boolean isConnected(Vertex vertex1, Vertex vertex2) {
-        return true; // A faire
+        int i = 0;
+        boolean res = false;
+        ArrayList<Vertex> vertexSeen = new ArrayList<>(0);
+        vertexSeen.add(this.vertices.get(i));
+        Vertex aVerif;
+        while (i<vertexSeen.size()){
+            Vertex actuel = vertexSeen.get(i);
+            int index1 = actuel.getId();
+            int j = 0;
+            while(this.edges.get(index1).get(j) != null){
+                if (this.edges.get(index1).get(j).getEnds()[0].getId()==index1){
+                    aVerif = this.edges.get(index1).get(j).getEnds()[1];
+                    int index2 = aVerif.getId();
+                    int actAVerif;
+                    boolean alreadySeen = false;
+                    for(int k = 0; !alreadySeen && k<vertexSeen.size(); k++){
+                        actAVerif = vertexSeen.get(k).getId();
+                        if (actAVerif==index2){
+                            alreadySeen = true;
+                        }
+                    }
+                    if (!alreadySeen){
+                        vertexSeen.add(aVerif);
+                    }
+                }
+                if (this.edges.get(index1).get(j).getEnds()[1].getId()==index1){
+                    aVerif = this.edges.get(index1).get(j).getEnds()[1];
+                    int index2 = aVerif.getId();
+                    int actAVerif;
+                    boolean alreadySeen = false;
+                    for(int k = 0; !alreadySeen && k<vertexSeen.size();k++){
+                        actAVerif = vertexSeen.get(k).getId();
+                        if (actAVerif==index2){
+                            alreadySeen = true;
+                        }
+                    }
+                    if (!alreadySeen){
+                        vertexSeen.add(aVerif);
+                    }
+                }
+                j++;
+            }
+            i++;
+        }
+        return vertexSeen.size()==this.vertices.size();
     }
     
     /**
@@ -131,7 +175,15 @@ public class IncidenceArrayGraph implements Graph {
      * @return retoune True si ils sont interconnectés
      */
     public boolean isConnected(){
-        return true; // A faire
+        for(ArrayList<Edge> edges : this.edges){
+            for(Edge edge : edges) {
+                Vertex[] vertices = edge.getEnds();
+                if(!isConnected(vertices[0], vertices[1])){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
     
     /**
@@ -232,5 +284,33 @@ public class IncidenceArrayGraph implements Graph {
      */
     public static void main(String[] args){
         System.out.println("IncidenceArrayGraph lancé");
+        
+        // Ne marche pas car Color n'est pas définit
+        // Ne marche pas car Color n'est pas définit
+        // Ne marche pas car Color n'est pas définit
+
+        // couleur = new Color("White");
+        
+        // IncidenceArrayGraph graph = new IncidenceArrayGraph(10);
+        // Vertex sommet1 = new Vertex(couleur, "Premier sommet");
+        // Vertex sommet2 = new Vertex(couleur, "Deuxième sommet");
+        // Vertex sommet3 = new Vertex(couleur, "Troisième sommet");
+        // try {
+        //     graph.addVertex(sommet1);
+        //     graph.addVertex(sommet2);
+        //     graph.addVertex(sommet3);
+        // } catch(GraphOverflowException e) {
+        //     System.out.println("Error GraphOverflowException");
+        //     exit();
+        // } catch(IllegalArgumentException e) {
+        //     System.out.println("Error IllegalArgumentException");
+        //     exit();
+        // }
+
+        // graph.addEdge(sommet1, sommet2);
+        // graph.addEdge(sommet2, sommet3);
+
+        // System.out.println("Le nombre de Sommets est : " + graph.nbOfVertices());
+        // System.out.println("le nombre d'arrete est : " + graph.nbOfEdges());
     }
 }
