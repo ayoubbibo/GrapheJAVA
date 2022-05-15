@@ -63,7 +63,7 @@ public class IncidenceArrayGraph implements Graph {
      */
     public void addVertex(Vertex vertex) throws GraphOverflowException, IllegalArgumentException {
         int id = vertex.getId();
-        if(id>=this.vertices.size()) {
+        if(id-1>=maxVertex) {
             throw new GraphOverflowException("Too much vertices");
         } else {
             if(this.vertices.get(id) == null) {
@@ -240,33 +240,27 @@ public class IncidenceArrayGraph implements Graph {
      */
     public static void main(String[] args){
         System.out.println("IncidenceArrayGraph lancé");
+
+        Color couleur = new Color(255, 255, 255);
         
-        // Ne marche pas car Color n'est pas définit
-        // Ne marche pas car Color n'est pas définit
-        // Ne marche pas car Color n'est pas définit
+        IncidenceArrayGraph graph = new IncidenceArrayGraph(10);
+        Vertex sommet1 = new Vertex(couleur, "Premier sommet");
+        Vertex sommet2 = new Vertex(couleur, "Deuxième sommet");
+        Vertex sommet3 = new Vertex(couleur, "Troisième sommet");
+        try {
+            graph.addVertex(sommet1);
+            graph.addVertex(sommet2);
+            graph.addVertex(sommet3);
+        } catch(GraphOverflowException e) {
+            System.out.println("Error GraphOverflowException");
+        } catch(IllegalArgumentException e) {
+            System.out.println("Error IllegalArgumentException");
+        }
 
-        // couleur = new Color("White");
-        
-        // IncidenceArrayGraph graph = new IncidenceArrayGraph(10);
-        // Vertex sommet1 = new Vertex(couleur, "Premier sommet");
-        // Vertex sommet2 = new Vertex(couleur, "Deuxième sommet");
-        // Vertex sommet3 = new Vertex(couleur, "Troisième sommet");
-        // try {
-        //     graph.addVertex(sommet1);
-        //     graph.addVertex(sommet2);
-        //     graph.addVertex(sommet3);
-        // } catch(GraphOverflowException e) {
-        //     System.out.println("Error GraphOverflowException");
-        //     exit();
-        // } catch(IllegalArgumentException e) {
-        //     System.out.println("Error IllegalArgumentException");
-        //     exit();
-        // }
+        graph.addEdge(sommet1, sommet2);
+        graph.addEdge(sommet2, sommet3);
 
-        // graph.addEdge(sommet1, sommet2);
-        // graph.addEdge(sommet2, sommet3);
-
-        // System.out.println("Le nombre de Sommets est : " + graph.nbOfVertices());
-        // System.out.println("le nombre d'arrete est : " + graph.nbOfEdges());
+        System.out.println("Le nombre de Sommets est : " + graph.nbOfVertices());
+        System.out.println("le nombre d'arrete est : " + graph.nbOfEdges());
     }
 }
