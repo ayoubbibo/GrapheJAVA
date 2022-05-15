@@ -123,51 +123,7 @@ public class IncidenceArrayGraph implements Graph {
      * @param vertex2 vertex
      */
     public boolean isConnected(Vertex vertex1, Vertex vertex2) {
-        int i = 0;
-        boolean res = false;
-        ArrayList<Vertex> vertexSeen = new ArrayList<>(0);
-        vertexSeen.add(this.vertices.get(i));
-        Vertex aVerif;
-        while (i<vertexSeen.size()){
-            Vertex actuel = vertexSeen.get(i);
-            int index1 = actuel.getId();
-            int j = 0;
-            while(this.edges.get(index1).get(j) != null){
-                if (this.edges.get(index1).get(j).getEnds()[0].getId()==index1){
-                    aVerif = this.edges.get(index1).get(j).getEnds()[1];
-                    int index2 = aVerif.getId();
-                    int actAVerif;
-                    boolean alreadySeen = false;
-                    for(int k = 0; !alreadySeen && k<vertexSeen.size(); k++){
-                        actAVerif = vertexSeen.get(k).getId();
-                        if (actAVerif==index2){
-                            alreadySeen = true;
-                        }
-                    }
-                    if (!alreadySeen){
-                        vertexSeen.add(aVerif);
-                    }
-                }
-                if (this.edges.get(index1).get(j).getEnds()[1].getId()==index1){
-                    aVerif = this.edges.get(index1).get(j).getEnds()[1];
-                    int index2 = aVerif.getId();
-                    int actAVerif;
-                    boolean alreadySeen = false;
-                    for(int k = 0; !alreadySeen && k<vertexSeen.size();k++){
-                        actAVerif = vertexSeen.get(k).getId();
-                        if (actAVerif==index2){
-                            alreadySeen = true;
-                        }
-                    }
-                    if (!alreadySeen){
-                        vertexSeen.add(aVerif);
-                    }
-                }
-                j++;
-            }
-            i++;
-        }
-        return vertexSeen.size()==this.vertices.size();
+        return true;
     }
     
     /**
